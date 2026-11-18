@@ -1,0 +1,12 @@
+
+# Python
+.venv/
+
+# DuckDB
+*.duckdb
+*.duckdb.wal
+
+# dbt
+target/
+dbt_packages/
+logs/
