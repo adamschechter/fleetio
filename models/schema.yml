@@ -1,0 +1,65 @@
+version: 2
+
+models:
+  - name: stg_leads
+    description: Cleaned lead records loaded from the leads seed. One row per lead.
+    columns:
+      - name: lead_id
+        tests: [not_null, unique]
+      - name: lead_source
+        tests: [not_null]
+
+  - name: stg_contacts
+    description: Cleaned contacts created when leads convert. One row per contact.
+    columns:
+      - name: contact_id
+        tests: [not_null, unique]
+      - name: lead_id
+        tests:
+          - relationships:
+              arguments:
+                to: ref('stg_leads')
+                field: lead_id
+
+  - name: stg_accounts
+    description: Cleaned account records. One row per account.
+    columns:
+      - name: account_id
+        tests: [not_null, unique]
+
+  - name: stg_opportunities
+    description: Cleaned sales opportunities. One row per opportunity.
+    columns:
+      - name: opportunity_id
+        tests: [not_null, unique]
+      - name: account_id
+        tests:
+          - relationships:
+              arguments:
+                to: ref('stg_accounts')
+                field: account_id
+      - name: is_won
+        tests:
+          - accepted_values:
+              arguments:
+                values: [true, false]
+
+  - name: fct_lead_conversion
+    description: Lead-level funnel fact for conversion rates and conversion drivers.
+    columns:
+      - name: lead_id
+        tests: [not_null, unique]
+
+  - name: fct_opportunity
+    description: Opportunity-level fact for closed and won analysis.
+    columns:
+      - name: opportunity_id
+        tests: [not_null, unique]
+
+  - name: agg_lead_conversion_daily
+    description: Daily converted-lead counts by source, with week and month rollup keys.
+    columns:
+      - name: conversion_date
+        tests: [not_null]
+      - name: converted_leads
+        tests: [not_null]

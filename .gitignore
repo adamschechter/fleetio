@@ -1,6 +1,8 @@
 
 # Python
 .venv/
+.DS_Store
+.user.yml
 
 # DuckDB
 *.duckdb

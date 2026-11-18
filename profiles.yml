@@ -1,0 +1,7 @@
+fleetio:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: fleetio.duckdb
+      threads: 4
