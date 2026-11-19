@@ -1,7 +1,7 @@
 with leads as (
     
     select * from {{ ref('stg_leads') }}
-    
+
 ),
 
 contacts as (
@@ -49,7 +49,7 @@ final as (
     left join accounts on contacts.account_id = accounts.account_id
     left join opportunities on accounts.account_id = opportunities.account_id
 
-),
+)
 
 select * from final
 

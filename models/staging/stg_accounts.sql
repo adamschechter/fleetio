@@ -1,7 +1,7 @@
 with source as (
 
     select * from {{ ref('accounts') }}
-    
+
 ),
 
 renamed as (
@@ -18,4 +18,4 @@ renamed as (
     from source
 )
 
-select * from final
+select * from renamed
