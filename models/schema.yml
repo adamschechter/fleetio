@@ -39,6 +39,12 @@ models:
                 to: ref('stg_accounts')
                 field: account_id
 
+  - name: int_lead_lifecycle
+    description: Joined lead-to-contact-to-account-to-opportunity lifecycle used by the funnel fact models.
+    columns:
+      - name: lead_id
+        tests: [not_null, unique]
+
   - name: fct_lead_conversion
     description: Lead-level funnel fact for conversion rates and conversion drivers.
     columns:
@@ -50,11 +56,3 @@ models:
     columns:
       - name: opportunity_id
         tests: [not_null, unique]
-
-  - name: agg_lead_conversion_daily
-    description: Daily converted-lead counts by source, with week and month rollup keys.
-    columns:
-      - name: conversion_date
-        tests: [not_null]
-      - name: converted_leads
-        tests: [not_null]
