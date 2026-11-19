@@ -11,7 +11,7 @@ select
     opportunity_closed_at,
     cast(opportunity_created_at as date) as opportunity_created_date,
     cast(opportunity_closed_at as date) as opportunity_closed_date,
-    date_trunc('month', opportunity_closed_at) as opportunity_closed_month,
+    timestamp_trunc(opportunity_closed_at, month) as opportunity_closed_month,
     is_closed,
     is_won,
     lead_source,
@@ -23,7 +23,7 @@ select
     lead_city as city,
     case
         when is_closed and opportunity_closed_at is not null
-            then date_diff('day', opportunity_created_at, opportunity_closed_at)
+            then timestamp_diff(opportunity_closed_at, opportunity_created_at, day)
     end as days_to_close
 from lifecycle
 where opportunity_id is not null

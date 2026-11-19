@@ -9,8 +9,8 @@ select
     lead_converted_at,
     cast(lead_created_at as date) as lead_created_date,
     cast(lead_converted_at as date) as lead_converted_date,
-    date_trunc('week', lead_converted_at) as lead_converted_week,
-    date_trunc('month', lead_converted_at) as lead_converted_month,
+    timestamp_trunc(lead_converted_at, week) as lead_converted_week,
+    timestamp_trunc(lead_converted_at, month) as lead_converted_month,
     lead_source,
     job_title,
     lead_country as country,
@@ -21,6 +21,6 @@ select
     lead_converted_at is not null as is_converted,
     case
         when lead_converted_at is not null
-            then date_diff('minute', lead_created_at, lead_converted_at)
+            then timestamp_diff(lead_converted_at, lead_created_at, minute)
     end as minutes_to_conversion
 from lifecycle
