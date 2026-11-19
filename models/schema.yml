@@ -50,11 +50,3 @@ models:
     columns:
       - name: opportunity_id
         tests: [not_null, unique]
-
-  - name: agg_lead_conversion_daily
-    description: Daily converted-lead counts by source, with week and month rollup keys.
-    columns:
-      - name: conversion_date
-        tests: [not_null]
-      - name: converted_leads
-        tests: [not_null]
