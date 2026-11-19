@@ -17,13 +17,22 @@ models:
   fleetio:
     staging:
       +materialized: view
-
     intermediate:
       +materialized: view
-
     marts:
       +materialized: table
 
 seeds:
   fleetio:
     +quote_columns: false
+    contacts:
+      +column_types:
+        created_at: string
+    leads:
+      +column_types:
+        created_at: string
+        converted_at: string
+    opportunities:
+      +column_types:
+        created_at: string
+        closed_at: string

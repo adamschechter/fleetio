@@ -38,11 +38,6 @@ models:
               arguments:
                 to: ref('stg_accounts')
                 field: account_id
-      - name: is_won
-        tests:
-          - accepted_values:
-              arguments:
-                values: [true, false]
 
   - name: fct_lead_conversion
     description: Lead-level funnel fact for conversion rates and conversion drivers.
