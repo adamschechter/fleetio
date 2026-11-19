@@ -15,7 +15,7 @@ renamed as (
         company,
         cast(created_at as timestamp) as lead_created_at,
         cast(converted_at as timestamp) as lead_converted_at,
-        source as lead_source,
+        source.source as lead_source,
         country,
         state,
         city,
